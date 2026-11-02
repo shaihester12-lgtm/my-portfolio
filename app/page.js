@@ -278,16 +278,9 @@ setMobileMenuOpen(false);
               </div>
             </div>
 
-<button
-  type="button"
-  className="about-work-button"
-  onClick={() => {
-    setShowAbout(false);
-    setShowWork(true);
-  }}
->
+<a href="#work-panel" className="about-work-button">
   CHECK OUT MY WORK <span>↗</span>
-</button>
+</a>
 
 </section>
 </div>
