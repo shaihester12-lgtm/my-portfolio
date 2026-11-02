@@ -127,8 +127,8 @@ useEffect(() => {
 <button
   type="button"
   className="desktop-theme-toggle"
-  data-theme-toggle
   aria-label="Toggle dark mode"
+  onClick={() => setDarkMode((current) => !current)}
 >
   {darkMode ? "LIGHT ↗" : "DARK ↗"}
 </button>
