@@ -22,26 +22,23 @@ useEffect(() => {
   if (!poster) return;
 
   const positionCat = () => {
-console.log("CAT POSITION FUNCTION RUNNING");
+    const target = poster.querySelector('[data-cat-stop="different"]');
 
-const target = poster.querySelector('[data-cat-stop="different"]');
-
-if (!target) {
-  console.log("CAT TARGET NOT FOUND");
-  return;
-}
-
-console.log("CAT TARGET FOUND:", target);
-    console.log("CAT TARGET FOUND:", target);
-console.log("CAT TARGET POSITION:", target.getBoundingClientRect());
+    if (!target) {
+      console.log("CAT TARGET NOT FOUND");
+      return;
+    }
 
     const posterRect = poster.getBoundingClientRect();
     const targetRect = target.getBoundingClientRect();
 
-    setCatPosition({
-      x: targetRect.left - posterRect.left + 80,
+    const newPosition = {
+      x: targetRect.left - posterRect.left + 75,
       y: targetRect.top - posterRect.top + targetRect.height / 2 + 25,
-    });
+    };
+
+    console.log("FINAL CAT POSITION:", newPosition);
+    setCatPosition(newPosition);
   };
 
   positionCat();
