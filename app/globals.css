@@ -347,13 +347,15 @@ body {
   position: absolute;
   z-index: 10;
   width: 68px;
+  left: 82%;
+  top: 58%;
   transform: translate(-50%, -50%);
   color: var(--foreground);
   pointer-events: none;
   transition:
     left 1.2s cubic-bezier(0.22, 1, 0.36, 1),
     top 1.2s cubic-bezier(0.22, 1, 0.36, 1),
-    width 0.8s ease;
+    transition: width 0.8s ease;
 }
 
 .pixel-cat.cat-small {

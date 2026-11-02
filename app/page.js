@@ -18,31 +18,42 @@ export default function Home() {
   const posterRef = useRef(null);
 
 useEffect(() => {
+  const poster = posterRef.current;
+  if (!poster) return;
 
-  const buttons = document.querySelectorAll("[data-theme-toggle]");
+  const positionCat = () => {
+console.log("CAT POSITION FUNCTION RUNNING");
 
-  const handleThemeToggle = () => {
-    const poster = document.querySelector(".poster");
-    if (!poster) return;
+const target = poster.querySelector('[data-cat-stop="different"]');
 
-    poster.classList.toggle("dark");
-    poster.classList.toggle("light");
+if (!target) {
+  console.log("CAT TARGET NOT FOUND");
+  return;
+}
 
-    const isDark = poster.classList.contains("dark");
+console.log("CAT TARGET FOUND:", target);
+    console.log("CAT TARGET FOUND:", target);
+console.log("CAT TARGET POSITION:", target.getBoundingClientRect());
 
-    buttons.forEach((button) => {
-      button.textContent = isDark ? "LIGHT ↗" : "DARK ↗";
+    const posterRect = poster.getBoundingClientRect();
+    const targetRect = target.getBoundingClientRect();
+
+    setCatPosition({
+      x: targetRect.left - posterRect.left + 80,
+      y: targetRect.top - posterRect.top + targetRect.height / 2 + 25,
     });
   };
 
-  buttons.forEach((button) => {
-    button.addEventListener("click", handleThemeToggle);
-  });
+  positionCat();
+
+  const observer = new ResizeObserver(positionCat);
+  observer.observe(poster);
+
+  window.addEventListener("resize", positionCat);
 
   return () => {
-    buttons.forEach((button) => {
-      button.removeEventListener("click", handleThemeToggle);
-    });
+    observer.disconnect();
+    window.removeEventListener("resize", positionCat);
   };
 }, []);
 
@@ -538,11 +549,10 @@ className="pixel-cat"
 
 aria-label="A little pixel cat"
 style={{
-  left: catPosition ? `${catPosition.x}px` : "80%",
-  top: catPosition ? `${catPosition.y}px` : "75%",
-  visibility: "visible",
-}}
-      >
+  left: catPosition ? `${catPosition.x}px` : "82%",
+  top: catPosition ? `${catPosition.y}px` : "58%",
+  visibility: catPosition ? "visible" : "hidden",
+}}>
         <svg
           viewBox="0 0 120 100"
           xmlns="http://www.w3.org/2000/svg"
